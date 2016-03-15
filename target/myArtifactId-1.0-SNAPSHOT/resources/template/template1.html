@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row" ng-controller="MaterialTempl1">
+
+        <div class="col-md-5 col-sm-offset-2">
+
+            <div class="form-group">
+                <label for="materialName">{{ 'MATERIALNAME' | translate }}</label>
+                <input type="text" class="form-control" id="materialName" placeholder="name material"
+                        ng-model="material.materialName" required>
+            </div>
+            <div class="form-group">
+                <label for="description">{{ 'DESCRIPTION' | translate }}</label>
+
+                <textarea rows="5" class="form-control" id="description" placeholder="Input material text"
+                          ng-model="material.description" required>
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="imageUpload">{{'UPLOADIMAGE' | translate}}</label>
+                <button class="btn-default btn glyphicon glyphicon-picture" id="imageUpload"
+                        title="{{ 'ADDIMAGE' | translate }}" data-toggle="tooltip"
+                        ng-file-select ng-model="file_image">
+                </button>
+            </div>
+
+            <div class="form-group">
+                <div class="file">
+                    <div class="progress" id="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active"
+                             role="progressbar"
+                             aria-valuemin="0" aria-valuemax="100" ng-style="fileStatus">{{file.progress}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <img ng-src="{{material.url}}" ng-show="material.url" class="img-rounded" width="470" height="350">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" ng-click="addMaterial(material)">{{ 'ADDMATERIAL' | translate }}
+                </button>
+                <button class="btn btn-primary" ng-click="reset()">{{ 'RESET' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>

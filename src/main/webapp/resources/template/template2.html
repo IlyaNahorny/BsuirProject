@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row" ng-controller="MaterialTempl2">
+
+        <div class="col-md-5 col-sm-offset-2">
+            <div class="form-group">
+                <label for="materialName">{{ 'MATERIALNAME' | translate }}</label>
+                <input type="text" class="form-control" id="materialName" placeholder="name material"
+                        ng-model="material.materialName" required>
+            </div>
+            <div class="form-group">
+                <label for="description">{{ 'DESCRIPTION' | translate }}</label>
+
+                <textarea rows="5" class="form-control" id="description" placeholder="Input material text"
+                          ng-model="material.description" required>
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="materialUrl">{{ 'URL' | translate }}</label>
+                <input type="text" class="form-control" id="materialUrl" placeholder="Input url video"
+                       ng-model="urlVideo" required>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary" ng-click="addMaterial(material,urlVideo)">{{ 'ADDMATERIAL' | translate }}
+                </button>
+                <button class="btn btn-primary" ng-click="reset()">{{ 'RESET' | translate }}</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>

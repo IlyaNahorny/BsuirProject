@@ -1,0 +1,13 @@
+
+body {
+    background-color: rgba(244, 251, 245, 0.01);
+    color: #000000;
+}
+
+nav.navbar{
+    background-color: #e0e7e1;
+}
+
+a{
+    color: #080808;
+}
