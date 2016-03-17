@@ -8,4 +8,5 @@ import project.model.Material;
 public interface MaterialService {
     public void addMaterial(Material material);
     Material getMaterialByMaterialName(String materialName);
+    Material getMaterialById(Integer id);
 }

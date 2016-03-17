@@ -140,7 +140,7 @@
                                 </a>
                             </div>
                             <div class="col-md-4">
-                                <a href="#" style="color: #ac2925; font-size: large;">Читать
+                                <a href="/account/${user.username}/${material.id_material}" style="color: #ac2925; font-size: large;">Читать
                                     полностью</a>
                             </div>
                         </div>

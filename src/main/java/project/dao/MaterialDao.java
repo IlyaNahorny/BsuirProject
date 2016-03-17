@@ -11,5 +11,5 @@ public interface MaterialDao {
     void addMaterial(Material material);
     List<Material> getAllMaterials(String username);
     Material getMaterialByMaterialName(String materialName);
-
+    Material getMaterialById(Integer id);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import project.model.User;
+import project.service.MaterialService;
 import project.service.UserService;
 
 /**
@@ -17,6 +18,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private MaterialService materialService;
 
     @RequestMapping(value = {"/","/home"})
     public String showHomePage(ModelMap modelMap){
@@ -62,6 +65,14 @@ public class UserController {
     public String showUserAccount(ModelMap modelMap, @PathVariable("username") String username) {
         modelMap.addAttribute("user",userService.findByUserName(username));
         return "account";
+    }
+
+    @RequestMapping(value = "/account/{username}/{id_material}", method = RequestMethod.GET)
+    public String showUserMaterial(ModelMap modelMap, @PathVariable("username") String username,
+                                   @PathVariable("id_material") Integer id_material) {
+        modelMap.addAttribute("user", userService.findByUserName(username));
+        modelMap.addAttribute("material", materialService.getMaterialById(id_material));
+        return "show_material";
     }
 
     @RequestMapping(value = "/account/{username}/edit", method = RequestMethod.GET)

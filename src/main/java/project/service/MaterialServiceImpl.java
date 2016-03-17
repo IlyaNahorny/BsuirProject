@@ -23,6 +23,10 @@ public class MaterialServiceImpl implements MaterialService {
         return material;
     }
 
+    public Material getMaterialById(Integer id) {
+        return materialDao.getMaterialById(id);
+    }
+
     public void addMaterial(Material material) {
 //        material.setTemplate("template1");
         materialDao.addMaterial(material);

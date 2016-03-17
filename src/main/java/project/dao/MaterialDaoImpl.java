@@ -33,6 +33,10 @@ public class MaterialDaoImpl implements MaterialDao{
         }
     }
 
+    public Material getMaterialById(Integer id) {
+        return entityManager.find(Material.class, id);
+    }
+
     public void addMaterial(Material material) {
         entityManager.persist(material);
     }
