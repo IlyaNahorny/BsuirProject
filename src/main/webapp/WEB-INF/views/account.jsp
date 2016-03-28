@@ -16,14 +16,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/2.2.2/angular-file-upload-all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-sanitize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.8.1/angular-translate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-storage-cookie/2.8.1/angular-translate-storage-cookie.js"></script>
-    <script src="/resources/angular/user.js"></script>
+    <script src="/resources/angular/meterial.js"></script>
 
 </head>
-<body ng-app="user" ng-controller="TranslateController">
+<body ng-app="material" ng-controller="MaterialController">
 <nav class="navbar">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -128,30 +130,18 @@
                                 </c:choose>
                                     ${material.description}
                             </div>
-
                         </div>
                         <div class="row">
-                            <div class="col-md-8">
-                                <a href ng-click="rating('${user.username}','${material.materialName}','down')">
-                                    <span class="glyphicon glyphicon-thumbs-down" style="font-size: x-large"></span>
-                                </a>
-                                <a href ng-click="rating('${user.username}','${material.materialName}','up')">
-                                    <span class="glyphicon glyphicon-thumbs-up" style="font-size: x-large"></span>
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="/account/${user.username}/${material.id_material}" style="color: #ac2925; font-size: large;">Читать
-                                    полностью</a>
-                            </div>
+                            <div style="color: #1b6d85; font-size: large;">Райтинг статьи: {{ratingValue}} | Коментариев: 0 |
+                                <a href="/account/${user.username}/${material.id_material}" style="color: #1b6d85; text-decoration: none;">Читать
+                                    полностью</a></div>
                         </div>
-
                     </div>
                 </div>
             </c:forEach>
         </div>
     </div>
 </div>
-
 
 </body>
 </html>

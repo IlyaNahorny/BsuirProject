@@ -29,7 +29,7 @@ materialModule.config(['$translateProvider', function ($translateProvider) {
         DARK: 'dark',
         MATERIALNAME: 'Material name',
         DESCRIPTION: 'Description',
-        UPLOADIMAGE:'Upload image',
+        UPLOADIMAGE: 'Upload image',
         TEMPNAME: 'Creating material',
         ADDMATERIAL: 'Add material',
         RESET: 'Reset',
@@ -67,7 +67,7 @@ materialModule.config(['$translateProvider', function ($translateProvider) {
             DARK: 'темный',
             MATERIALNAME: 'Имя материала',
             DESCRIPTION: 'Описание',
-            UPLOADIMAGE:'Загрузите изображение',
+            UPLOADIMAGE: 'Загрузите изображение',
             TEMPNAME: 'Создание материала',
             ADDMATERIAL: 'Добавить материал',
             RESET: 'Сброс',
@@ -94,53 +94,54 @@ materialModule.config(['$routeProvider',
             });
     }]);
 
-materialModule.controller('MaterialTempl1', function ($scope,$rootScope, $window, $http, $translate, $upload) {
+materialModule.controller('MaterialTempl1', function ($scope, $rootScope, $window, $http, $translate, $upload) {
     $scope.changeLanguage = function (key) {
         $translate.use(key);
     };
 
     //$scope.material={};
 
-    $scope.$watch('file_image', function() {
+    $scope.$watch('file_image', function () {
         var file = $scope.file_image;
         if (!file || file.length > 1) return;
 
-            $scope.upload = $upload.upload({
-                url: "https://api.cloudinary.com/v1_1/projectbsuir/upload",
-                data: {upload_preset: 'ojgb4mcn'},
-                file: file
-            }).progress(function (e) {
-                file.progress = Math.round((e.loaded * 100.0) / e.total) + "%";
-                $scope.fileStatus = {
-                    "width" : file.progress
-                };
-                file.status = "Uploading... " + file.progress + "%";
-                //console.log(file.progress);
-                if(!$scope.$$phase) {
-                    $scope.$apply();
-                }})
-                .success(function (data) {
-                    $scope.material.url = data.url;
-                })
-                .error(function(){
-                    alert("Error while downloading image!");
-                });
+        $scope.upload = $upload.upload({
+            url: "https://api.cloudinary.com/v1_1/projectbsuir/upload",
+            data: {upload_preset: 'ojgb4mcn'},
+            file: file
+        }).progress(function (e) {
+            file.progress = Math.round((e.loaded * 100.0) / e.total) + "%";
+            $scope.fileStatus = {
+                "width": file.progress
+            };
+            file.status = "Uploading... " + file.progress + "%";
+            //console.log(file.progress);
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        })
+            .success(function (data) {
+                $scope.material.url = data.url;
+            })
+            .error(function () {
+                alert("Error while downloading image!");
+            });
 
     });
 
-    $scope.addMaterial = function(material){
+    $scope.addMaterial = function (material) {
         $scope.material.template = 'template1';
         console.log(material);
-        $http.post('/material/add',material).success(function(){
-                $scope.reset();
-                alert("success");
-            })
-            .error(function(){
+        $http.post('/material/add', material).success(function () {
+            $scope.reset();
+            alert("success");
+        })
+            .error(function () {
                 alert("error");
             });
     };
 
-    $scope.reset = function(){
+    $scope.reset = function () {
         $scope.material = {};
         $scope.fileStatus = {};
     };
@@ -148,30 +149,58 @@ materialModule.controller('MaterialTempl1', function ($scope,$rootScope, $window
 
 });
 
-materialModule.controller('MaterialTempl2', function ($scope,$rootScope, $window, $http, $translate) {
+materialModule.controller('MaterialTempl2', function ($scope, $rootScope, $window, $http, $translate) {
     $scope.changeLanguage = function (key) {
         $translate.use(key);
     };
 
-    $scope.addMaterial = function(material,urlVideo){
+    $scope.addMaterial = function (material, urlVideo) {
         $scope.material.template = 'template2';
         var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
         var matches = regex.exec(urlVideo);
-        var url = "https://www.youtube.com/embed/"+matches[1];
-        $scope.material.url =url;
+        var url = "https://www.youtube.com/embed/" + matches[1];
+        $scope.material.url = url;
         console.log(material);
-        $http.post('/material/add',material).success(function(){
+        $http.post('/material/add', material).success(function () {
             $scope.reset();
             alert("success");
         })
-            .error(function(){
+            .error(function () {
                 alert("error");
             });
     };
 
-    $scope.reset = function(){
+    $scope.reset = function () {
         $scope.material = {};
     };
+});
+materialModule.controller('MaterialController', function ($scope,$window, $http, $translate) {
+    $scope.changeLanguage = function (key) {
+        $translate.use(key);
+    };
 
+    $http.get('/material/rating/get').success(function (data) {
+        $scope.ratingValue = data;
+    });
+
+    $scope.rating = function (username, material_id, action) {
+        var value = -1;
+        if (action == 'up') {
+            value = 1;
+        }
+        var rating = {
+            userName: username,
+            value: value,
+            material: {id_material: material_id}
+        };
+        $http.post('/material/rating/set', rating).success(function (data) {
+            $scope.ratingValue = data;
+            //alert("success");
+        })
+            .error(function () {
+                alert("error");
+            });
+
+    };
 
 });

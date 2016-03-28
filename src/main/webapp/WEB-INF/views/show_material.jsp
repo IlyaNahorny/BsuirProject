@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:url value="http://localhost:8181/logout" var="logout"/>
+
 <html>
 <head>
     <title>Show material</title>
@@ -23,7 +24,7 @@
     <script src="/resources/angular/meterial.js"></script>
 
 </head>
-<body ng-app="material" ng-controller="MaterialTempl1">
+<body ng-app="material" ng-controller="MaterialController">
 <nav class="navbar">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -68,5 +69,44 @@
     </div>
 </nav>
 
+<div class="container">
+    <div class="row ">
+        <div class="well">
+            <div>
+                <center><h1>${material.materialName}</h1></center>
+            </div>
+            <div style="min-height: 510px;">
+                <c:choose>
+                    <c:when test="${material.template eq 'template1'}">
+                        <img src="${material.url}" width="700" height="500"
+                             align="left" hspace="10" class="img-rounded">
+
+                    </c:when>
+                    <c:otherwise>
+                        <iframe src="${material.url}" width="700" height="500" style="margin-right: 2%"
+                                frameborder="0" allowfullscreen align="left"></iframe>
+                    </c:otherwise>
+                </c:choose>
+                ${material.description}
+            </div>
+            <div class="row" style="font-size: xx-large">
+                <div class="col-md-6"> Рейтинг : {{ratingValue}} | Коментариев : 0</div>
+                <sec:authorize access="isAuthenticated()">
+                    <div class="col-md-2 col-md-offset-4">
+                        <a href ng-click="rating('${name}','${material.id_material}','down')"
+                           style="text-decoration: none;">
+                            <span class="glyphicon glyphicon-thumbs-down"></span>
+                        </a>
+                        <a href ng-click="rating('${name}','${material.id_material}','up')"
+                           style="text-decoration: none; margin-left: 20px">
+                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                        </a>
+                    </div>
+                </sec:authorize>
+            </div>
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

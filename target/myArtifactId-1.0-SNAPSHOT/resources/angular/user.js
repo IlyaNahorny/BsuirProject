@@ -69,25 +69,4 @@ userModule.controller('TranslateController',function ($scope,$http,$translate) {
         $translate.use(key);
     };
 
-    $scope.rating = function(username, material, action){
-        var value = -1;
-        if(action == 'up') {
-            value = 1;
-        }
-        var rating = {
-            userName: username,
-            value: value,
-            material: {materialName: material}
-        };
-        $http.post('/material/rating',rating).success(function(){
-            alert("success");
-        })
-            .error(function(){
-                alert("error");
-            });
-
-        //console.log(rating);
-    };
-
-
  });

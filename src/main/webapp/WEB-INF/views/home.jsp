@@ -32,6 +32,14 @@
         <div class="navbar-header">
             <div class="navbar-brand">{{'PROJNAME' | translate}}</div>
         </div>
+        <sec:authorize access="isAuthenticated()">
+            <sec:authentication var="name" property="principal.username"/>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/account/${name}">{{'HOME' | translate}}</a>
+                </li>
+            </ul>
+        </sec:authorize>
         <ul class="nav navbar-nav navbar-right">
             <sec:authorize access="isAnonymous()">
                 <li><a href="/login">

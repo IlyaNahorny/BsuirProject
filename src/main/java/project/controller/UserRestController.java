@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.*;
 import project.model.Material;
 import project.model.Rating;
 import project.model.User;
+import project.service.Condition;
 import project.service.MaterialService;
 import project.service.RatingService;
 import project.service.UserService;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Ilya on 20.02.2016.
@@ -41,20 +44,15 @@ public class UserRestController {
         return "success";
     }
 
-    @RequestMapping(value="/material/rating", method = RequestMethod.POST)
-    public void setRating(@RequestBody Rating rating){
-        Rating rating1 = ratingService.alreadyExist(rating.getUserName());
-        if(rating1 != null){
-            if(rating.getValue() != rating1.getValue()){
-                ratingService.updateValue(rating.getId(),rating);
-            }
-        }
-        else{
-            String name = rating.getMaterial().getMaterialName();
-            Material material = materialService.getMaterialByMaterialName(name);
-            rating.setMaterial(material);
-            ratingService.addRating(rating);
-        }
+    @RequestMapping(value="/material/rating/set", method = RequestMethod.POST)
+    public int setRating(@RequestBody Rating rating){
+        ratingService.setOrUpdateRating(rating);
+        return ratingService.getRatingMaterial(rating.getMaterial().getId_material());
+    }
+    @RequestMapping(value = "/material/rating/get", method = RequestMethod.GET)
+    public int getRating(){
+        int value = ratingService.getRatingMaterial(Condition.getIdMaterial());
+        return value;
     }
 
     @RequestMapping(value = "/material/add", method = RequestMethod.POST)

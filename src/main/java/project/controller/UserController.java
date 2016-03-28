@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import project.model.User;
+import project.service.Condition;
 import project.service.MaterialService;
 import project.service.UserService;
 
@@ -72,6 +73,7 @@ public class UserController {
                                    @PathVariable("id_material") Integer id_material) {
         modelMap.addAttribute("user", userService.findByUserName(username));
         modelMap.addAttribute("material", materialService.getMaterialById(id_material));
+        Condition.setIdMaterial(id_material);
         return "show_material";
     }
 
