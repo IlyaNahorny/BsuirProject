@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name="materials")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE, getterVisibility = JsonAutoDetect.Visibility.NONE)
-public class Material implements Serializable{
+public class Material implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,6 +34,14 @@ public class Material implements Serializable{
     @JsonProperty
     private String url;
 
+    @Column(name = "rating", nullable = false)
+    @JsonProperty
+    private int rating = 0;
+
+    @Column(name = "comment", nullable = false)
+    @JsonProperty
+    private int comment = 0;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "username", referencedColumnName = "username", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private User user;
@@ -45,9 +53,6 @@ public class Material implements Serializable{
     @JsonProperty
     @OneToMany(orphanRemoval = true, mappedBy = "material", cascade = {CascadeType.REMOVE}, fetch = FetchType.EAGER)
     private Set<Rating> ratings;
-
-
-
 
 
     public Set<Rating> getRatings() {
@@ -112,5 +117,21 @@ public class Material implements Serializable{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public int getComment() {
+        return comment;
+    }
+
+    public void setComment(int comment) {
+        this.comment = comment;
     }
 }

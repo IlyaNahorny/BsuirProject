@@ -38,7 +38,6 @@
                 </li>
             </ul>
         </sec:authorize>
-
         <ul class="nav navbar-nav navbar-right">
             <sec:authorize access="isAnonymous()">
                 <li><a href="/login">
@@ -71,33 +70,35 @@
 
 <div class="container">
     <div class="row ">
+        <div>
+            <center><h1>{{material.materialName}}</h1></center>
+        </div>
         <div class="well">
-            <div>
-                <center><h1>${material.materialName}</h1></center>
-            </div>
+            <%--<div>--%>
+                <%--<center><h1>{{material.materialName}}</h1></center>--%>
+            <%--</div>--%>
             <div style="min-height: 510px;">
-                <c:choose>
-                    <c:when test="${material.template eq 'template1'}">
-                        <img src="${material.url}" width="700" height="500"
-                             align="left" hspace="10" class="img-rounded">
 
-                    </c:when>
-                    <c:otherwise>
-                        <iframe src="${material.url}" width="700" height="500" style="margin-right: 2%"
-                                frameborder="0" allowfullscreen align="left"></iframe>
-                    </c:otherwise>
-                </c:choose>
-                ${material.description}
+                     <span ng-if="material.template === 'template1'">
+                        <img ng-src="{{material.url}}" width="700" height="500"
+                             align="left" hspace="10" class="img-rounded">
+                     </span>
+                    <span ng-if="material.template === 'template2'">
+                         <iframe src="{{url}}" width="700" height="500" style="margin-right: 2%"
+                                 frameborder="0" allowfullscreen align="left"></iframe>
+                    </span>
+
+                {{material.description}}
             </div>
             <div class="row" style="font-size: xx-large">
-                <div class="col-md-6"> Рейтинг : {{ratingValue}} | Коментариев : 0</div>
+                <div class="col-md-6"> Рейтинг : {{material.rating}} | Коментариев : {{material.comment}}</div>
                 <sec:authorize access="isAuthenticated()">
                     <div class="col-md-2 col-md-offset-4">
-                        <a href ng-click="rating('${name}','${material.id_material}','down')"
+                        <a href ng-click="rating('${name}',material.id_material,'down')"
                            style="text-decoration: none;">
                             <span class="glyphicon glyphicon-thumbs-down"></span>
                         </a>
-                        <a href ng-click="rating('${name}','${material.id_material}','up')"
+                        <a href ng-click="rating('${name}',material.id_material,'up')"
                            style="text-decoration: none; margin-left: 20px">
                             <span class="glyphicon glyphicon-thumbs-up"></span>
                         </a>

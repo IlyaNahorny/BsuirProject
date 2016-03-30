@@ -46,13 +46,11 @@ public class UserRestController {
 
     @RequestMapping(value="/material/rating/set", method = RequestMethod.POST)
     public int setRating(@RequestBody Rating rating){
-        ratingService.setOrUpdateRating(rating);
-        return ratingService.getRatingMaterial(rating.getMaterial().getId_material());
+        return ratingService.setOrUpdateRating(rating);
     }
-    @RequestMapping(value = "/material/rating/get", method = RequestMethod.GET)
-    public int getRating(){
-        int value = ratingService.getRatingMaterial(Condition.getIdMaterial());
-        return value;
+    @RequestMapping(value = "/material/get", method = RequestMethod.GET)
+    public Material getRating(){
+        return materialService.getMaterialById(Condition.getIdMaterial());
     }
 
     @RequestMapping(value = "/material/add", method = RequestMethod.POST)

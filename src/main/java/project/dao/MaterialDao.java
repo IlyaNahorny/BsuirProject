@@ -12,4 +12,5 @@ public interface MaterialDao {
     List<Material> getAllMaterials(String username);
     Material getMaterialByMaterialName(String materialName);
     Material getMaterialById(Integer id);
+    void updateMaterialRating(Integer id, int value);
 }

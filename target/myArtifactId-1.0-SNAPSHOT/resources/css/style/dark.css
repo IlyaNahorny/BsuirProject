@@ -2,6 +2,8 @@
 body {
     background-color: #f3f9f4;
     color: slategray;
+    /*background: url(http://ichef-1.bbci.co.uk/news/ws/660/amz/worldservice/live/assets/images/2016/02/01/160201122447_books_shelves_human_head_shaped_624x351_istock_nocredit.jpg) center no-repeat;*/
+    /*background-size: cover;*/
 }
 
 nav.navbar{
@@ -11,3 +13,10 @@ nav.navbar{
 a{
     color: slategray;
 }
+
+html, body {
+    width: 100%;
+    height: 100%;
+
+}
+

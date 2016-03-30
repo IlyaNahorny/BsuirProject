@@ -16,16 +16,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/2.2.2/angular-file-upload-all.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-route.js"></script>
+    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/2.2.2/angular-file-upload-all.js"></script>--%>
+    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-route.js"></script>--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-sanitize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.8.1/angular-translate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-storage-cookie/2.8.1/angular-translate-storage-cookie.js"></script>
-    <script src="/resources/angular/meterial.js"></script>
+    <script src="/resources/angular/user.js"></script>
 
 </head>
-<body ng-app="material" ng-controller="MaterialController">
+<body ng-app="user" ng-controller="TranslateController">
 <nav class="navbar">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -132,7 +132,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div style="color: #1b6d85; font-size: large;">Райтинг статьи: {{ratingValue}} | Коментариев: 0 |
+                            <div style="color: #1b6d85; font-size: large;">Рейтинг статьи: ${material.rating} | Коментариев: ${material.comment} |
                                 <a href="/account/${user.username}/${material.id_material}" style="color: #1b6d85; text-decoration: none;">Читать
                                     полностью</a></div>
                         </div>

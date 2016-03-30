@@ -24,8 +24,9 @@ public class RatingServiceImpl implements RatingService {
         ratingDao.addRating(rating);
     }
 
-    public void setOrUpdateRating(Rating rating) {
-        Material material = materialService.getMaterialById(rating.getMaterial().getId_material());
+    public int setOrUpdateRating(Rating rating) {
+        Integer id = rating.getMaterial().getId_material();
+        Material material = materialService.getMaterialById(id);
         Set<Rating> ratings =  material.getRatings();
         Iterator iterator = ratings.iterator();
         boolean checkExist = false;
@@ -44,10 +45,10 @@ public class RatingServiceImpl implements RatingService {
             rating.setMaterial(material);
             addRating(rating);
         }
+        return getRatingMaterial(id);
     }
 
     public int getRatingMaterial(Integer id) {
-        Integer idas = id;
         Material material = materialService.getMaterialById(id);
         int value = 0;
         Set<Rating> ratings = material.getRatings();
@@ -56,6 +57,7 @@ public class RatingServiceImpl implements RatingService {
             Rating rating1 = (Rating) iterator.next();
             value += rating1.getValue();
         }
+        materialService.updateMaterialRating(id,value);
         return value;
     }
 

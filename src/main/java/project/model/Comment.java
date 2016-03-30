@@ -26,7 +26,7 @@ public class Comment implements Serializable{
     private String userName;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "materialName", referencedColumnName = "materialName", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "id_material", referencedColumnName = "id_material", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Material material;
 
     public Integer getId_comment() {

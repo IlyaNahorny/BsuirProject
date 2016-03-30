@@ -172,15 +172,17 @@ materialModule.controller('MaterialTempl2', function ($scope, $rootScope, $windo
 
     $scope.reset = function () {
         $scope.material = {};
+        $scope.urlVideo = '';
     };
 });
-materialModule.controller('MaterialController', function ($scope,$window, $http, $translate) {
+materialModule.controller('MaterialController', function ($scope,$window, $http, $translate,$sce) {
     $scope.changeLanguage = function (key) {
         $translate.use(key);
     };
 
-    $http.get('/material/rating/get').success(function (data) {
-        $scope.ratingValue = data;
+    $http.get('/material/get').success(function (data) {
+        $scope.material = data;
+        $scope.url = $sce.trustAsResourceUrl(data.url);
     });
 
     $scope.rating = function (username, material_id, action) {
@@ -193,8 +195,9 @@ materialModule.controller('MaterialController', function ($scope,$window, $http,
             value: value,
             material: {id_material: material_id}
         };
+        //console.log(rating);
         $http.post('/material/rating/set', rating).success(function (data) {
-            $scope.ratingValue = data;
+            $scope.material.rating = data;
             //alert("success");
         })
             .error(function () {

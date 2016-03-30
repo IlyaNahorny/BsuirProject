@@ -28,7 +28,11 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     public void addMaterial(Material material) {
-//        material.setTemplate("template1");
         materialDao.addMaterial(material);
+
+    }
+
+    public void updateMaterialRating(Integer id, int value) {
+        materialDao.updateMaterialRating(id,value);
     }
 }

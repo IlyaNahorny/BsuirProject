@@ -40,4 +40,9 @@ public class MaterialDaoImpl implements MaterialDao{
     public void addMaterial(Material material) {
         entityManager.persist(material);
     }
+
+    public void updateMaterialRating(Integer id, int value) {
+            Material material = entityManager.getReference(Material.class,id);
+            material.setRating(value);
+    }
 }

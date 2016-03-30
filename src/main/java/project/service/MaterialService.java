@@ -9,4 +9,5 @@ public interface MaterialService {
     public void addMaterial(Material material);
     Material getMaterialByMaterialName(String materialName);
     Material getMaterialById(Integer id);
+    void updateMaterialRating(Integer id, int value);
 }

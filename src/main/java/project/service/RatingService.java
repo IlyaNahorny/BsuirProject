@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface RatingService {
     void addRating(Rating rating);
-    void setOrUpdateRating(Rating rating);
+    int setOrUpdateRating(Rating rating);
     int getRatingMaterial(Integer id);
     void updateValue(Integer id, Rating rating);
 }

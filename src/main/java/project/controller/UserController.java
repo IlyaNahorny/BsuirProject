@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import project.model.User;
 import project.service.Condition;
 import project.service.MaterialService;
+import project.service.RatingService;
 import project.service.UserService;
 
 /**
@@ -21,6 +22,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private MaterialService materialService;
+    @Autowired
+    private RatingService ratingService;
 
     @RequestMapping(value = {"/","/home"})
     public String showHomePage(ModelMap modelMap){
@@ -65,6 +68,7 @@ public class UserController {
     @RequestMapping(value = "/account/{username}", method = RequestMethod.GET)
     public String showUserAccount(ModelMap modelMap, @PathVariable("username") String username) {
         modelMap.addAttribute("user",userService.findByUserName(username));
+//        modelMap.addAttribute("ratingMaterial",ratingService.getRatingMaterial());
         return "account";
     }
 
@@ -72,7 +76,7 @@ public class UserController {
     public String showUserMaterial(ModelMap modelMap, @PathVariable("username") String username,
                                    @PathVariable("id_material") Integer id_material) {
         modelMap.addAttribute("user", userService.findByUserName(username));
-        modelMap.addAttribute("material", materialService.getMaterialById(id_material));
+//        modelMap.addAttribute("material", materialService.getMaterialById(id_material));
         Condition.setIdMaterial(id_material);
         return "show_material";
     }
